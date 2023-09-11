@@ -1,0 +1,11 @@
+// https://leetcode.com/problems/calculate-special-bonus
+
+select t.employee_id, t.bonus from 
+(select a.employee_id, a.salary as bonus
+    from Employees a
+    where a.employee_id % 2 != 0 and a.name not like 'M%'
+union
+select b.employee_id, 0 as bonus
+    from Employees b
+    where b.employee_id % 2 = 0 or b.name like 'M%') as t
+order by t.employee_id asc;
